@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
+    <script src="{% static 'scripts/app.js' %}" type="module"></script>
+    <title>縮短網址功能</title>
+</head>
+<body>
+    <div class="flex justify-center items-center p-10">
+        <div class="max-w-[700px] mx-auto p-10 bg-white rounded-3xl" x-data="shortUrlApp()">
+            <h1 class="text-2xl text-center font-black mb-5">縮短您的網址</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="bg-primary text-white rounded-md" type="submit">生成短網址</button>
+            </form>
+            <h2>短網址：<input type="text" id="shortUrl" value="{{ short_url }}" readonly></h2>
+            <button @click="copyToClipboard">複製短網址</button>
+        </div>
+    </div>
+</body>
+</html>
